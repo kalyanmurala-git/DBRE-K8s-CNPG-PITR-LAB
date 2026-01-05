@@ -1,7 +1,8 @@
 
 **1️. Install CloudNativePG Operator**
-#kubectl apply --server-side --force-conflicts \
--f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.24/releases/cnpg-1.24.0.yaml
+
+
+#kubectl apply --server-side --force-conflicts -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.24/releases/cnpg-1.24.0.yaml
 
 
 **Verify:**
@@ -51,9 +52,10 @@ INSERT INTO orders (amount) VALUES
 
 SELECT * FROM orders;
 SELECT now();
-📌 Note the timestamp — this is your PITR target reference.
+*** Note the timestamp — this is your PITR target reference.
 
 **5. Take Base Backup**
+
 kubectl get backups -n database
 
 
@@ -68,21 +70,25 @@ pitr-base-backup   pg-ha-pitr   barmanObjectStore   completed
 
 
 **7. Create PITR Restore Cluster**
+
 Yaml file: 
 pg-ha-pitr-restore.yaml
 
 --> Apply restore cluster YAML.
+
 #kubectl apply -f pg-ha-pitr-restore.yaml
 
 
 **8. Observe Restore Pods****
+
 #kubectl get pods -n database -w
 
 Validate: Automation Monitor Script for PITR:
 
 Bash script : verify-pitr.sh
-#kubectl exec -n database <new-pod> -- \
-psql -U postgres -d pitr_lab
+
+#kubectl exec -n database <new-pod> -- psql -U postgres -d pitr_lab
+
 SELECT * FROM orders;
 
 ubuntu@DESKTOP-7M24H1S:~/pg-pitr$ ./verify-pitr.sh
@@ -98,6 +104,7 @@ cluster.postgresql.cnpg.io/pg-ha-pitr-restore condition met
 ✅ Primary: pg-ha-pitr-restore-1
 
 📊 PITR DATA VERIFICATION:
+
 Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
 
      status      | total_rows |   earliest_transaction    |    latest_transaction     |    latest_unix
@@ -107,6 +114,7 @@ Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
 
 
 🔍 POSTGRESQL RECOVERY STATUS:
+
 Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
 
    mode   | in_recovery | last_receive_lsn | last_replay_lsn | last_xact_timestamp
@@ -122,7 +130,8 @@ Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
 ubuntu@DESKTOP-7M24H1S:~/pg-pitr$
 
 
-✅ Rows inserted after the recovery timestamp are not present
-✅ Database is restored exactly to the desired point in time
+** Rows inserted after the recovery timestamp are not present
+
+** Database is restored exactly to the desired point in time
 
 
