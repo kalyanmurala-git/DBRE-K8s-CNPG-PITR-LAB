@@ -1,0 +1,15 @@
+backup:
+  barmanObjectStore:
+    destinationPath: s3://k8s-kops-kalyan
+    s3Credentials:
+      accessKeyId:
+        name: aws-creds
+        key: AWS_ACCESS_KEY_ID
+      secretAccessKey:
+        name: aws-creds
+        key: AWS_SECRET_ACCESS_KEY
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+
