@@ -1,5 +1,5 @@
 
-**1️ Install CloudNativePG Operator**
+**1️. Install CloudNativePG Operator**
 #kubectl apply --server-side --force-conflicts \
 -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.24/releases/cnpg-1.24.0.yaml
 
@@ -86,14 +86,20 @@ psql -U postgres -d pitr_lab
 SELECT * FROM orders;
 
 ubuntu@DESKTOP-7M24H1S:~/pg-pitr$ ./verify-pitr.sh
+
 🔍 Validating PITR Restore: pg-ha-pitr-restore in database
+
 ⏳ Waiting for cluster ready...
+
 cluster.postgresql.cnpg.io/pg-ha-pitr-restore condition met
+
 🔍 Finding primary pod...
+
 ✅ Primary: pg-ha-pitr-restore-1
 
 📊 PITR DATA VERIFICATION:
 Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+
      status      | total_rows |   earliest_transaction    |    latest_transaction     |    latest_unix
 -----------------+------------+---------------------------+---------------------------+-------------------
  ✅ PITR SUCCESS |         16 | 2026-01-05 05:51:34.90521 | 2026-01-05 06:26:07.99149 | 1767594367.991490
@@ -102,9 +108,11 @@ Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
 
 🔍 POSTGRESQL RECOVERY STATUS:
 Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
+
    mode   | in_recovery | last_receive_lsn | last_replay_lsn | last_xact_timestamp
 ----------+-------------+------------------+-----------------+---------------------
  Recovery | f           |                  |                 |
+ 
 (1 row)
 
 
