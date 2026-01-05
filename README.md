@@ -92,11 +92,12 @@ Or
 Validate: Automation Monitor Script for PITR:
 
 
-Bash script : verify-pitr.sh
+Bash script : verify-pitr.sh 
 
 
 
-ubuntu@DESKTOP-7M24H1S:~/pg-pitr$ ./verify-pitr.sh
+ubuntu@DESKTOP-7M24H1S:~/pg-pitr$ ./verify-pitr.sh pg-ha-pitr-restore database
+
 
 🔍 Validating PITR Restore: pg-ha-pitr-restore in database
 
