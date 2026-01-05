@@ -83,13 +83,18 @@ pg-ha-pitr-restore.yaml
 
 #kubectl get pods -n database -w
 
+#kubectl exec -n database <new-pod> -- psql -U postgres -d pitr_lab
+
+pitr_lab# SELECT * FROM orders;
+
+Or
+
 Validate: Automation Monitor Script for PITR:
+
 
 Bash script : verify-pitr.sh
 
-#kubectl exec -n database <new-pod> -- psql -U postgres -d pitr_lab
 
-SELECT * FROM orders;
 
 ubuntu@DESKTOP-7M24H1S:~/pg-pitr$ ./verify-pitr.sh
 
@@ -125,8 +130,11 @@ Defaulted container "postgres" out of: postgres, bootstrap-controller (init)
 
 
 🎉 PITR Validation Complete!
+
 💡 Expected: max(created_at) matches your targetTime
+
 💾 S3 Backup: s3://k8s-kops-kalyan/pg-ha-pitr/
+
 ubuntu@DESKTOP-7M24H1S:~/pg-pitr$
 
 
